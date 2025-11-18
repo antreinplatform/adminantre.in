@@ -1,0 +1,2086 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Antre.in — Solusi Antrean Modern untuk Bisnis Anda</title>
+
+  <!-- Bootstrap CSS & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <!-- Chart.js for graphs -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    :root{
+      --brand-blue: #0075F2;
+      --brand-yellow: #F7F200;
+      --brand-cream: #f8f8f8;
+      --brand-white: #ffffff;
+      --muted: #6c757d;
+      --dark-text: #212529;
+      --card-radius: 16px;
+      --shadow-soft: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    body{
+      font-family: "Helvetica", Helvetica, Arial, sans-serif;
+      background: var(--brand-white); /* Ubah background utama jadi putih */
+      color: var(--dark-text);
+      -webkit-font-smoothing: antialiased;
+      margin:0;
+      overflow-x: hidden;
+    }
+    
+    /* --- Splash Screen --- */
+    #splashScreen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: var(--brand-white);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease-out;
+    }
+    #splashScreen img {
+        max-width: 250px;
+        width: 60%;
+    }
+    
+    /* --- Universal Styles --- */
+    .section-padding {
+        padding: 80px 0;
+    }
+    .btn-brand {
+        background-color: var(--brand-blue);
+        color: var(--brand-white);
+        border-radius: 12px;
+        padding: 0.75rem 1.5rem;
+        font-weight: bold;
+        transition: all 0.2s ease-in-out;
+    }
+    .btn-brand:hover {
+        background-color: #0056b3;
+        color: var(--brand-white);
+        transform: translateY(-2px);
+    }
+     .btn-outline-brand {
+        border-color: var(--brand-blue);
+        color: var(--brand-blue);
+        border-radius: 12px;
+        padding: 0.75rem 1.5rem;
+        font-weight: bold;
+        transition: all 0.2s ease-in-out;
+    }
+     .btn-outline-brand:hover {
+        background-color: var(--brand-blue);
+        color: var(--brand-white);
+    }
+
+
+    /* --- Landing Page Styles --- */
+    .hero-section {
+        background-color: var(--brand-yellow); /* Ubah hero jadi kuning */
+        color: var(--dark-text); /* Ubah teks jadi gelap */
+        padding-bottom: 60px;
+        text-align: center;
+    }
+    /* Revisi: Atur banner agar tidak terlalu lebar dan memiliki sudut melengkung */
+    .hero-banner {
+        width: 100%;
+        max-height: 45vh; /* Batasi tinggi banner */
+        object-fit: cover; /* Pastikan gambar tidak gepeng */
+        border-radius: 24px; /* Tambahkan sudut melengkung */
+        margin-top: 1.5rem; /* Beri sedikit jarak dari navbar */
+        box-shadow: var(--shadow-soft);
+    }
+    .hero-section h1 {
+        font-weight: bold;
+        color: var(--brand-blue); /* Ubah H1 jadi biru */
+    }
+    .features-section {
+        background-color: var(--brand-yellow); /* Ubah fitur jadi kuning */
+    }
+    .feature-card {
+        background-color: var(--brand-white); /* Kartu jadi putih */
+        padding: 2rem;
+        border-radius: var(--card-radius);
+        text-align: center;
+        height: 100%;
+        border: 2px solid var(--brand-blue);
+    }
+    .feature-card i {
+        font-size: 3rem;
+        color: var(--brand-blue);
+        margin-bottom: 1rem;
+    }
+    .feature-card h5 {
+        font-weight: bold;
+        color: var(--dark-text);
+    }
+    .why-us-section {
+        background-color: var(--brand-yellow);
+    }
+    .why-us-item {
+        text-align: center;
+    }
+    .why-us-item i {
+        font-size: 2.5rem;
+        color: var(--brand-blue);
+        margin-bottom: 1rem;
+    }
+    .testimonials-section {
+        background-color: var(--brand-yellow);
+    }
+    .testimonial-card {
+        padding: 2rem;
+        border-radius: var(--card-radius);
+        border: 1px solid #ddd;
+        background-color: var(--brand-white);
+        height: 100%;
+    }
+    .testimonial-card .author {
+        font-weight: bold;
+        color: var(--brand-blue);
+    }
+    .faq-section {
+        background-color: var(--brand-yellow);
+    }
+    .accordion-button:not(.collapsed) {
+        color: var(--dark-text);
+        background-color: var(--brand-white);
+        box-shadow: inset 0 -1px 0 rgba(0,0,0,.125);
+    }
+    .accordion-item {
+        border-radius: var(--card-radius) !important;
+        margin-bottom: 1rem;
+        border: none;
+    }
+     .accordion-header{
+        border-radius: var(--card-radius) !important;
+    }
+    footer {
+        background-color: var(--brand-blue);
+        color: var(--brand-white);
+        padding: 50px 0;
+    }
+    footer a {
+        color: var(--brand-white);
+        text-decoration: none;
+    }
+    footer a:hover {
+        text-decoration: underline;
+    }
+    footer .social-icons i {
+        font-size: 1.5rem;
+        margin-right: 15px;
+    }
+    
+    /* --- Login & Register Page Styles --- */
+    .login-container {
+        min-height: 100vh;
+    }
+    .login-promo {
+        background-color: var(--brand-yellow);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 4rem;
+    }
+    .login-promo .logo {
+        font-size: 3rem;
+        font-weight: bold;
+        color: var(--brand-blue);
+    }
+    .login-promo .lead {
+        color: var(--dark-text);
+    }
+    .login-promo .illustration img {
+        max-width: 250px;
+        height: auto;
+    }
+    .login-form-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--brand-cream);
+    }
+    .login-form-wrapper {
+        width: 100%;
+        max-width: 400px;
+        padding: 2rem;
+    }
+    .form-control, .form-select {
+        border-radius: 12px;
+        padding: 0.75rem 1rem;
+    }
+    .form-control:focus, .form-select:focus {
+        border-color: var(--brand-blue);
+        box-shadow: 0 0 0 0.25rem rgba(0, 117, 242, 0.25);
+    }
+    
+    /* --- Dashboard Styles --- */
+    .dashboard-wrapper {
+        display: flex;
+        min-height: 100vh;
+    }
+    .sidebar {
+        width: 260px;
+        background-color: var(--brand-yellow);
+        padding: 1.5rem 0;
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+        transition: margin-left 0.3s ease;
+    }
+    .sidebar .logo {
+        font-size: 2rem;
+        font-weight: bold;
+        color: var(--brand-blue);
+        text-align: center;
+        margin-bottom: 2rem;
+        padding: 0 1rem;
+    }
+    .sidebar .nav-link {
+        color: var(--dark-text);
+        padding: 0.8rem 1.5rem;
+        margin: 0.2rem 1rem;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        transition: all 0.2s ease-in-out;
+    }
+    .sidebar .nav-link i {
+        margin-right: 1rem;
+        font-size: 1.2rem;
+        width: 20px;
+        text-align: center;
+    }
+    .sidebar .nav-link:hover, .sidebar .nav-link.active {
+        background-color: var(--brand-blue);
+        color: var(--brand-white);
+        box-shadow: var(--shadow-soft);
+    }
+
+    .main-content {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    .main-header {
+        background-color: var(--brand-blue);
+        color: var(--brand-white);
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .main-header .user-info {
+        display: flex;
+        align-items: center;
+    }
+    .main-header .user-info .avatar-img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-left: 10px;
+        border: 2px solid var(--brand-white);
+    }
+    .main-header .notification-icon-wrapper {
+        position: relative;
+        cursor: pointer;
+    }
+    .main-header .notification-icon {
+        font-size: 1.5rem;
+    }
+    .content-area {
+        padding: 2rem;
+        flex-grow: 1;
+        overflow-y: auto;
+        background-color: var(--brand-cream);
+    }
+    .content-section {
+        opacity: 0;
+        transform: translateY(10px);
+        animation: fadeIn 0.5s forwards;
+    }
+    @keyframes fadeIn {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    .card-custom {
+      background: var(--brand-white);
+      border-radius: var(--card-radius);
+      box-shadow: var(--shadow-soft);
+      border: none;
+    }
+
+    /* --- Pesanan Page Styles --- */
+    /* Revisi: Perbaiki alignment pada kartu ringkasan pesanan */
+    .order-summary-card {
+        background-color: var(--brand-blue);
+        color: var(--brand-white);
+        border-radius: var(--card-radius);
+        padding: 1.5rem;
+        text-align: center;
+        display: flex; /* Tambahkan flexbox */
+        flex-direction: column; /* Atur arah ke bawah */
+        justify-content: center; /* Pusatkan secara vertikal */
+        height: 100%;
+    }
+    .order-summary-card .value {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: var(--brand-yellow);
+        line-height: 1.2; /* Atur line-height agar tidak terlalu jauh */
+    }
+    .order-summary-card .title {
+        font-size: 1rem;
+        opacity: 0.9;
+    }
+    .table-pesanan th {
+        background-color: var(--brand-yellow);
+        color: var(--dark-text);
+        font-weight: bold;
+    }
+    .badge-status {
+        font-size: 0.9rem;
+        padding: 0.4em 0.8em;
+        border-radius: 10px;
+    }
+
+    /* --- Statistik Page & Dashboard Styles --- */
+    .stats-card-blue {
+        background-color: var(--brand-blue);
+        color: var(--brand-white);
+        border-radius: var(--card-radius);
+        padding: 1rem;
+    }
+    /* Revisi: Seragamkan ukuran font untuk semua nilai statistik */
+    .stats-card-blue .value {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: var(--brand-yellow);
+    }
+
+    /* --- Profil Page Styles --- */
+    .profile-header {
+        background-color: var(--brand-blue);
+        color: var(--brand-white);
+        padding: 2rem;
+        border-radius: var(--card-radius);
+    }
+    .profile-stats-card {
+        border-left: 3px solid var(--brand-yellow);
+    }
+    .action-button {
+        border: 2px solid var(--dark-text);
+        color: var(--dark-text);
+        font-weight: bold;
+        transition: all 0.2s;
+    }
+    .action-button:hover {
+        background-color: var(--dark-text);
+        color: var(--brand-white);
+    }
+    .product-card {
+        border-radius: var(--card-radius);
+        overflow: hidden;
+        border: 1px solid #eee;
+    }
+    .product-card img {
+        height: 180px;
+        object-fit: cover;
+    }
+    .product-card .card-body {
+        background-color: var(--brand-white);
+    }
+
+    /* --- Chat Styles --- */
+    .chat-box {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    .chat-bubble {
+        padding: 0.75rem 1rem;
+        border-radius: 1.25rem;
+        max-width: 75%;
+        word-wrap: break-word;
+    }
+    .chat-bubble-admin {
+        background-color: var(--brand-blue);
+        color: var(--brand-white);
+        align-self: flex-end; /* Align to the right */
+        border-bottom-right-radius: 0.25rem;
+    }
+    .chat-bubble-customer {
+        background-color: #e9ecef;
+        color: var(--dark-text);
+        align-self: flex-start; /* Align to the left */
+        border-bottom-left-radius: 0.25rem;
+    }
+    .chat-bubble-name {
+        font-weight: bold;
+        font-size: 0.8rem;
+        display: block;
+        margin-bottom: 0.25rem;
+    }
+    
+    /* --- Responsive Styles --- */
+    @media (max-width: 768px) {
+        .login-promo {
+            display: none;
+        }
+        .dashboard-wrapper {
+            flex-direction: column;
+        }
+        .sidebar {
+            width: 100%;
+            height: auto;
+            flex-direction: row;
+            overflow-x: auto;
+            padding: 0.5rem;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--brand-yellow);
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+        }
+        .sidebar .logo { display: none; }
+        .sidebar .nav {
+            flex-direction: row !important;
+            justify-content: space-around;
+            width: 100%;
+        }
+        .sidebar .nav-item {
+            flex: 1;
+        }
+        .sidebar .nav-link {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0.5rem;
+            margin: 0;
+            height: 100%;
+        }
+        .sidebar .nav-link i {
+            margin-right: 0;
+            margin-bottom: 4px;
+        }
+        .sidebar .nav-link span {
+            font-size: 0.7rem;
+        }
+        .main-content {
+            width: 100%;
+        }
+        .content-area {
+            padding: 1rem;
+            padding-bottom: 80px; /* Space for bottom nav */
+        }
+        .main-header {
+            padding: 1rem;
+        }
+        .hero-banner {
+             border-radius: 16px;
+        }
+    }
+  </style>
+</head>
+<body>
+    <!-- Splash Screen -->
+    <div id="splashScreen">
+        <img src="https://i.ibb.co/bF05h2D/0227d0db-a5d0-4f9a-b9b3-8a4d0568ffcf.jpg" alt="Antre.in Logo">
+    </div>
+
+    <!-- =================================================================
+    LANDING PAGE (Initially hidden)
+    ================================================================== -->
+    <div id="landingPage" class="d-none">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
+          <div class="container">
+            <a class="navbar-brand fw-bold d-flex align-items-center" href="#" style="color: var(--brand-blue);">
+                <img src="https://i.ibb.co/bF05h2D/0227d0db-a5d0-4f9a-b9b3-8a4d0568ffcf.jpg" alt="Antre.in Logo" style="height: 30px; border-radius: 4px;" class="me-2">
+                <span>Antre.in</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="#features">Fitur</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#why-us">Kenapa Kami</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#faq">FAQ</a>
+                </li>
+              </ul>
+              <a href="#" onclick="showAuthPage(); return false;" class="btn btn-brand ms-lg-3">Login / Daftar</a>
+            </div>
+          </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <header class="hero-section">
+            <div class="container">
+                <!-- Revisi: Mengubah banner agar tidak memanjang dan diberi sudut melengkung -->
+                <img src="https://i.ibb.co/bF05h2D/0227d0db-a5d0-4f9a-b9b3-8a4d0568ffcf.jpg" alt="Banner Usaha" class="hero-banner">
+            </div>
+        </header>
+
+        <!-- Features Section -->
+        <section id="features" class="features-section section-padding">
+            <div class="container">
+                <h2 class="text-center fw-bold mb-5">FITUR</h2>
+                <div class="row g-4">
+                    <div class="col-md-3">
+                        <div class="feature-card">
+                            <i class="bi bi-cart-check-fill"></i>
+                            <h5>Pre-Order & Pesanan Digital</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="feature-card">
+                           <i class="bi bi-bar-chart-line-fill"></i>
+                            <h5>Dashboard Analitik</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="feature-card">
+                            <i class="bi bi-clock-history"></i>
+                            <h5>Dynamic Slot untuk Batas Pelanan</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="feature-card">
+                            <i class="bi bi-award-fill"></i>
+                            <h5>Loyalty & Reward</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Us Section -->
+        <section id="why-us" class="why-us-section section-padding">
+            <div class="container">
+                <h2 class="text-center fw-bold mb-5">Kenapa UMKM harus menggunakan Antre.in?</h2>
+                <div class="row text-center g-5">
+                    <div class="col-md-4">
+                        <div class="why-us-item">
+                            <i class="bi bi-clock-fill"></i>
+                            <p>Pantau waktu tunggu dan kelola ekspektasi antrean yang panjang.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                         <div class="why-us-item">
+                            <i class="bi bi-person-check-fill"></i>
+                            <p>Peningkatan loyalitas lewat reward dan promo pelanggan.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                         <div class="why-us-item">
+                            <i class="bi bi-chat-dots-fill"></i>
+                            <p>Chat langsung & track status.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="testimonials-section section-padding">
+            <div class="container">
+                <!-- Revisi: Mengubah teks "Apa Kata Pengguna" -->
+                <h2 class="text-center fw-bold mb-5">Apa Kata UMKM Pengguna Antre.in</h2>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="testimonial-card">
+                            <p>"Semenjak pakai Antre.in, omzet naik drastis. Pelanggan jadi nggak perlu antre lama, bisa pesan dari jauh-jauh hari. Manajemen pesanan jadi jauh lebih rapi, dan tingkat datang kembali pelanggan juga tinggi."</p>
+                            <div class="author mt-3">- Futago!</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="testimonial-card">
+                            <p>"Fitur analitiknya sangat membantu kami untuk tahu menu mana yang paling laku dan jam-jam ramai. Jadi bisa siapkan bahan baku lebih efisien. Pelanggan juga senang karena bisa lihat status pesanan mereka."</p>
+                            <div class="author mt-3">- Bakmie Kondang</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="faq-section section-padding">
+            <div class="container">
+                <h2 class="text-center fw-bold mb-5">Masih Ragu dan Ada Pertanyaan?</h2>
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="accordion" id="faqAccordion">
+                          <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Apa itu Antre.in?
+                              </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                              <div class="accordion-body">
+                                Antre.in adalah platform manajemen antrean dan pesanan digital yang membantu UMKM, terutama di bidang F&B, untuk mengelola operasional bisnis menjadi lebih efisien dan meningkatkan kepuasan pelanggan.
+                              </div>
+                            </div>
+                          </div>
+                          <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Kenapa menggunakan Antre.in?
+                              </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                              <div class="accordion-body">
+                                Dengan Antre.in, Anda bisa mengurangi antrean fisik, meningkatkan omzet melalui pre-order, memahami perilaku pelanggan lewat data analitik, dan membangun loyalitas pelanggan melalui sistem reward.
+                              </div>
+                            </div>
+                          </div>
+                          <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingThree">
+                              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Apakah Antre.in hanya untuk F&B?
+                              </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                              <div class="accordion-body">
+                                Meskipun dirancang optimal untuk F&B, Antre.in juga fleksibel untuk digunakan di berbagai jenis usaha jasa lainnya yang memerlukan manajemen antrean, seperti barbershop, klinik, atau tempat cuci mobil.
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="text-center mt-4">
+                            <a href="#">Lihat semua FAQ Antre.in</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 mb-4 mb-md-0">
+                        <h5 class="fw-bold">Antre.in</h5>
+                        <p>PT Antrean Maju Bersama</p>
+                        <div class="social-icons">
+                            <a href="#"><i class="bi bi-facebook"></i></a>
+                            <a href="#"><i class="bi bi-instagram"></i></a>
+                            <a href="#"><i class="bi bi-twitter"></i></a>
+                            <a href="#"><i class="bi bi-linkedin"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4 mb-md-0">
+                        <h5 class="fw-bold">Perusahaan</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#">Tentang Kami</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h5 class="fw-bold">Dukungan & Bantuan</h5>
+                        <ul class="list-unstyled">
+                            <li><i class="bi bi-telephone-fill"></i> 021-987-1212</li>
+                            <li><i class="bi bi-envelope-fill"></i> support@antre.in</li>
+                            <li><i class="bi bi-geo-alt-fill"></i> Antre.in HQ, Rawamangun, Jakarta, Indonesia</li>
+                        </ul>
+                    </div>
+                </div>
+                <hr class="my-4">
+                <div class="text-center">
+                    <small>&copy; 2025 Antre.in. All Rights Reserved.</small>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+    <!-- =================================================================
+    LOGIN & REGISTER PAGE (Initially hidden)
+    ================================================================== -->
+    <div id="authPage" class="d-none">
+        <div class="container-fluid login-container">
+            <div class="row vh-100">
+                <!-- Form Side (Now on the left) -->
+                <div class="col-md-6 login-form-container">
+                    <div class="login-form-wrapper">
+                        <!-- Login Form -->
+                        <div id="loginForm">
+                            <h2 class="mb-3 fw-bold">Masuk ke Akun Merchant</h2>
+                            <p class="text-muted mb-4">Selamat datang kembali! Silakan masuk.</p>
+                            <form onsubmit="event.preventDefault(); handleAuth('login');">
+                                <div class="mb-3">
+                                    <label for="loginBusinessName" class="form-label">Nama UMKM</label>
+                                    <input type="text" class="form-control" id="loginBusinessName" placeholder="Contoh: Kopi Tuku" required>
+                                    <small class="form-text text-muted">Coba: Kopi Tuku, Futago Ya!, dll.</small>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="loginEmail" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="loginEmail" placeholder="contoh@gmail.com" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="loginPassword" class="form-label">Password</label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" id="loginPassword" placeholder="••••••••" required>
+                                        <span class="input-group-text" style="cursor: pointer;" onclick="togglePasswordVisibility('loginPassword', this)"><i class="bi bi-eye-slash-fill"></i></span>
+                                    </div>
+                                </div>
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-brand">Masuk</button>
+                                </div>
+                            </form>
+                            <p class="text-center mt-4">
+                                Belum punya akun? <a href="#" onclick="showRegisterForm(); return false;" class="fw-bold" style="color: var(--brand-blue);">Daftar di sini</a>
+                            </p>
+                        </div>
+
+                        <!-- Register Form (Hidden by default) -->
+                        <div id="registerForm" class="d-none">
+                            <h2 class="mb-3 fw-bold">Buat Akun Baru</h2>
+                            <p class="text-muted mb-4">Gabung bersama kami dan kembangkan bisnismu.</p>
+                            <form onsubmit="event.preventDefault(); handleAuth('register');">
+                                <div class="mb-3">
+                                    <label for="registerName" class="form-label">Nama Bisnis</label>
+                                    <input type="text" class="form-control" id="registerName" placeholder="Contoh: Kopi Kenangan" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="registerEmail" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="registerEmail" placeholder="contoh@gmail.com" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="registerPhone" class="form-label">Nomor Telepon</label>
+                                    <input type="tel" class="form-control" id="registerPhone" placeholder="081234567890" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="registerPassword" class="form-label">Password</label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" id="registerPassword" placeholder="••••••••" required>
+                                        <span class="input-group-text" style="cursor: pointer;" onclick="togglePasswordVisibility('registerPassword', this)"><i class="bi bi-eye-slash-fill"></i></span>
+                                    </div>
+                                </div>
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-brand">Daftar Akun</button>
+                                </div>
+                            </form>
+                            <p class="text-center mt-4">
+                                Sudah punya akun? <a href="#" onclick="showLoginForm(); return false;" class="fw-bold" style="color: var(--brand-blue);">Masuk di sini</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Promo Side (Now on the right) -->
+                <div class="col-md-6 login-promo">
+                    <h2 class="fw-bold mb-3" style="color: var(--brand-blue);">Kelola Bisnis Anda</h2>
+                    <p class="lead my-4">Solusi antrean modern untuk bisnis Anda. Antre tanpa ribet!</p>
+                    <div class="illustration">
+                        <img src="https://i.ibb.co/bF05h2D/0227d0db-a5d0-4f9a-b9b3-8a4d0568ffcf.jpg" alt="Antre.in Logo">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Verification Modal -->
+    <div class="modal fade" id="verificationModal" tabindex="-1" aria-labelledby="verificationModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius: var(--card-radius);">
+          <div class="modal-header border-0">
+            <h5 class="modal-title" id="verificationModalLabel">Verifikasi Berhasil</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-center py-4">
+            <i class="bi bi-check-circle-fill text-success" style="font-size: 4rem;"></i>
+            <p class="mt-3 fs-5" id="verificationMessage">Pendaftaran berhasil!</p>
+            <p class="text-muted">Mengarahkan ke dasbor...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Product Modal -->
+    <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius: var(--card-radius);">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addProductModalLabel">Tambah Produk Baru</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="addProductForm">
+              <div class="mb-3">
+                <label for="productName" class="form-label">Nama Produk</label>
+                <input type="text" class="form-control" id="productName" required>
+              </div>
+              <div class="mb-3">
+                <label for="productPrice" class="form-label">Harga (Rp)</label>
+                <input type="number" class="form-control" id="productPrice" required>
+              </div>
+              <div class="mb-3">
+                <label for="productImage" class="form-label">URL Gambar Produk</label>
+                <input type="text" class="form-control" id="productImage" placeholder="https://example.com/image.jpg">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+            <button type="button" class="btn btn-primary" onclick="addProduct()">Simpan Produk</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit Profile Modal -->
+    <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content" style="border-radius: var(--card-radius);">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editProfileModalLabel">Edit Profil</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="card-custom p-4">
+                        <div class="row g-4 align-items-center">
+                            <div class="col-md-3 text-center">
+                                <img id="edit-profile-avatar" src="https://placehold.co/200x200/F7F200/0075F2?text=A" class="img-fluid rounded-circle mb-3" alt="Avatar">
+                            </div>
+                            <div class="col-md-9">
+                                <h4 class="mb-3 fw-bold" id="edit-profile-name-title">Admin UMKM</h4>
+                                <form onsubmit="event.preventDefault(); updateProfile();">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Nama</label>
+                                            <input type="text" class="form-control" id="edit-profile-name-input" value="Admin UMKM" oninput="handleProfileNameChange(this.value)">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Email</label>
+                                            <input type="email" class="form-control" id="edit-profile-email-input" value="admin@umkm.com">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Nomor Telepon</label>
+                                            <input type="tel" class="form-control" id="edit-profile-phone-input" value="08123456789">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="modalProfilePassword">Password</label>
+                                            <div class="input-group">
+                                                <input type="password" class="form-control" id="modalProfilePassword" value="********">
+                                                <span class="input-group-text" style="cursor: pointer;" onclick="togglePasswordVisibility('modalProfilePassword', this)"><i class="bi bi-eye-slash-fill"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-brand">Simpan Perubahan</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reply Modal -->
+    <div class="modal fade" id="replyModal" tabindex="-1" aria-labelledby="replyModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius: var(--card-radius);">
+          <div class="modal-header">
+            <h5 class="modal-title" id="replyModalLabel">Balas Ulasan</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+                <input type="hidden" id="replyReviewId">
+                <div class="mb-3">
+                    <label for="replyText" class="form-label">Balasan Anda:</label>
+                    <textarea class="form-control" id="replyText" rows="3"></textarea>
+                </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+            <button type="button" class="btn btn-primary" onclick="submitReply()">Kirim Balasan</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Modals for Dashboard -->
+    <div class="modal fade" id="slotUpdateModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content" style="border-radius: var(--card-radius);"><div class="modal-header border-0"><h5 class="modal-title">Update Berhasil</h5></div><div class="modal-body text-center py-4"><i class="bi bi-check-circle-fill text-success" style="font-size: 4rem;"></i><p class="mt-3 fs-5">Kapasitas slot antrean berhasil diubah!</p></div></div></div></div>
+    <div class="modal fade" id="profileUpdateModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content" style="border-radius: var(--card-radius);"><div class="modal-header border-0"><h5 class="modal-title">Update Berhasil</h5></div><div class="modal-body text-center py-4"><i class="bi bi-check-circle-fill text-success" style="font-size: 4rem;"></i><p class="mt-3 fs-5">Profil Anda berhasil diperbarui!</p></div></div></div></div>
+    <div class="modal fade" id="umkmModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content" style="border-radius: var(--card-radius);"><div class="modal-header border-0"><h5 class="modal-title" id="umkmModalLabel">Daftar UMKM</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body" id="umkmModalBody"></div></div></div></div>
+
+
+    <!-- =================================================================
+    DASHBOARD PAGE (Hidden by default)
+    ================================================================== -->
+    <div id="dashboardPage" class="d-none">
+        <div class="dashboard-wrapper">
+            <!-- Sidebar -->
+            <nav class="sidebar">
+                <div class="logo">Antre.in</div>
+                <ul class="nav flex-column flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" onclick="showSection('dashboard', this); return false;"><i class="bi bi-grid-1x2-fill"></i><span>Dashboard</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('pesanan', this); return false;"><i class="bi bi-receipt"></i><span>Pesanan</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('statistik', this); return false;"><i class="bi bi-bar-chart-line-fill"></i><span>Statistik</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="sidebar-ulasan-link" class="nav-link" href="#" onclick="showSection('ulasan', this); return false;"><i class="bi bi-star-fill"></i><span>Ulasan</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('notifikasi', this); return false;"><i class="bi bi-bell-fill"></i><span>Notifikasi</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('slot', this); return false;"><i class="bi bi-sliders"></i><span>Dynamic Slot</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('profil', this); return false;"><i class="bi bi-person-circle"></i><span>Profil</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('chat', this); return false;"><i class="bi bi-chat-dots-fill"></i><span>Chat</span></a>
+                    </li>
+                    <li class="nav-item">
+                       <a class="nav-link" href="#" onclick="logout(); return false;"><i class="bi bi-box-arrow-left"></i><span>Logout</span></a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Header -->
+                <header class="main-header">
+                    <div class="user-info ms-auto">
+                        <div class="notification-icon-wrapper me-3" onclick="handleNotificationClick()">
+                            <i class="bi bi-bell-fill notification-icon"></i>
+                            <span id="notification-badge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6em; padding: 0.4em 0.6em; display: none;">
+                                0
+                            </span>
+                        </div>
+                        <span id="header-user-name" class="me-2 d-none d-md-block">Halo, Burger Queen</span>
+                        <img id="header-user-avatar" src="https://placehold.co/100x100/F7F200/0075F2?text=B" alt="Avatar Admin" class="avatar-img">
+                    </div>
+                </header>
+
+                <!-- Content Area -->
+                <main class="content-area">
+                    <!-- Dashboard Section (UPDATED) -->
+                    <div id="dashboard-content" class="content-section">
+                        <h2 class="mb-4 fw-bold">Dashboard</h2>
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <div class="stats-card-blue">
+                                    <p class="mb-1"><i class="bi bi-wallet2 me-2"></i>Total Pendapatan</p>
+                                    <div class="value" id="dashboard-total-pendapatan">Rp 0</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="stats-card-blue">
+                                    <p class="mb-1"><i class="bi bi-receipt me-2"></i>Total Order</p>
+                                    <div class="value" id="dashboard-total-order">0</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="stats-card-blue">
+                                    <p class="mb-1"><i class="bi bi-star-fill me-2"></i>Rating Rata-rata</p>
+                                    <div class="value" id="dashboard-rating-rata2">0 <i class="bi bi-star-fill" style="font-size: 1.2rem;"></i></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-4 mt-2">
+                            <div class="col-lg-7">
+                                <div class="card-custom p-3">
+                                    <h5 class="fw-bold">Statistik Penjualan (Unit)</h5>
+                                    <!-- Revisi: Menyeragamkan tampilan angka -->
+                                    <p class="fw-bold fs-4" id="dashboard-total-sales-value">0</p>
+                                    <div style="position: relative; height:250px">
+                                        <canvas id="dashboardSalesChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="card-custom p-3">
+                                    <h5 class="fw-bold mb-3">Ulasan</h5>
+                                    <div id="dashboard-review-list" style="max-height: 280px; overflow-y: auto; padding-right: 10px;">
+                                        <!-- Ulasan akan di-render oleh JavaScript -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Pesanan Section -->
+                    <div id="pesanan-content" class="content-section d-none">
+                        <h2 class="mb-4 fw-bold">Order</h2>
+                        <div class="row g-4 mb-4" id="pesanan-summary-bar">
+                           <!-- Ringkasan akan di-render oleh JavaScript -->
+                        </div>
+                        <div class="card-custom p-3">
+                            <h4 class="fw-bold mb-3">Daftar Antrean</h4>
+                            <div class="table-responsive">
+                                <table class="table table-borderless table-hover">
+                                    <thead>
+                                        <tr class="table-pesanan">
+                                            <th scope="col">No</th>
+                                            <th scope="col">Nama</th>
+                                            <th scope="col">Pesanan</th>
+                                            <th scope="col">Total</th>
+                                            <th scope="col">Tipe</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="queue-table-body">
+                                       <!-- Daftar pesanan akan di-render oleh JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Statistik Section (Merged) -->
+                    <div id="statistik-content" class="content-section d-none">
+                        <h2 class="mb-4 fw-bold">Statistik</h2>
+                        <div class="row g-4">
+                            <div class="col-lg-8">
+                                <div class="card-custom p-3">
+                                    <h5 class="fw-bold">Tren Penjualan per Produk (Unit)</h5>
+                                    <div style="position: relative; height:300px">
+                                        <canvas id="monthlySalesLineChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="stats-card-blue d-flex flex-column justify-content-center">
+                                    <p class="mb-1"><i class="bi bi-wallet2 me-2"></i>Total Pendapatan Bulanan</p>
+                                    <!-- Revisi: Menyeragamkan tampilan angka -->
+                                    <div class="value" id="stats-monthly-income">Rp 0</div>
+                                    <hr class="text-white">
+                                    <p class="mb-1"><i class="bi bi-people-fill me-2"></i>Total Pelanggan</p>
+                                    <!-- Revisi: Menyeragamkan tampilan angka -->
+                                    <div class="value" id="stats-total-customers">0</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row g-4 mt-2">
+                             <div class="col-lg-7">
+                                <div class="card-custom p-3">
+                                    <h5 class="fw-bold">Pemasukan per Bulan</h5>
+                                    <div style="position: relative; height:300px">
+                                        <canvas id="monthlyIncomeBarChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="card-custom p-3">
+                                    <h5 class="fw-bold">Produk Terlaris</h5>
+                                    <div style="position: relative; height:300px">
+                                        <canvas id="productPieChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Ulasan Section (UPDATED) -->
+                    <div id="ulasan-content" class="content-section d-none">
+                        <h2 class="mb-4 fw-bold">Ulasan Pelanggan</h2>
+                        <div class="list-group" id="main-review-list">
+                          <!-- Daftar ulasan utama akan di-render oleh JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Notifikasi Section (UPDATED) -->
+                    <div id="notifikasi-content" class="content-section d-none">
+                        <h2 class="mb-4 fw-bold">Notifikasi Terbaru</h2>
+                        <div class="list-group" id="notification-list">
+                           <a href="#" onclick="showSection('ulasan', document.getElementById('sidebar-ulasan-link')); return false;" class="list-group-item list-group-item-action p-3" style="border-radius:var(--card-radius); margin-bottom: 1rem; border-color: #b6d4fe;">
+                               <div class="d-flex w-100 justify-content-between">
+                                   <h5 class="mb-1"><i class="bi bi-star-fill me-2"></i>Ulasan & Rating Baru</h5>
+                                   <small class="text-muted">5 menit lalu</small>
+                               </div>
+                               <p class="mb-1">Pelanggan baru memberikan rating <b>5/5 bintang</b> untuk pesanannya.</p>
+                               <small class="text-primary fw-bold">Lihat Ulasan</small>
+                           </a>
+                            <a href="#" class="list-group-item list-group-item-action p-3" style="border-radius:var(--card-radius); margin-bottom: 1rem; border-color: #bce8c2;">
+                               <div class="d-flex w-100 justify-content-between">
+                                   <h5 class="mb-1 text-success"><i class="bi bi-check-circle-fill me-2"></i>Pembayaran Berhasil</h5>
+                                   <small class="text-muted">8 menit lalu</small>
+                               </div>
+                               <p class="mb-1">Pembayaran pelanggan dengan antrian <b>#301</b> menggunakan <b>QRIS</b> berhasil sebesar <b>Rp 66.000</b>.</p>
+                               <small class="text-success fw-bold">Status: Lunas</small>
+                           </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Dynamic Slot Section -->
+                    <div id="slot-content" class="content-section d-none">
+                        <h2 class="mb-4 fw-bold">Dynamic Slot Antrean</h2>
+                        <div class="card-custom p-4" style="max-width: 500px;"><h5 class="fw-bold">Atur Kapasitas Antrean</h5><p class="text-muted">Tentukan jumlah maksimal pesanan yang dapat diproses per jam untuk menghindari penumpukan.</p><div class="input-group my-3"><input type="number" id="slot-capacity-input" class="form-control" value="100"><span class="input-group-text">pesanan/jam</span></div><button class="btn btn-brand w-100" onclick="updateSlot()">Update Kapasitas</button></div>
+                    </div>
+
+                    <!-- Profil Section (UPDATED) -->
+                    <div id="profil-content" class="content-section d-none">
+                        <h2 class="mb-4 fw-bold">Profil Akun</h2>
+                        <div class="row g-4">
+                            <!-- Left Side -->
+                            <div class="col-lg-8">
+                                <div class="profile-header mb-4">
+                                    <h3 class="fw-bold" id="profile-greeting">Hi Burger Queen!</h3>
+                                    <p>Terus jaga semangat kerjanya hari ini 🚀</p>
+                                </div>
+                            </div>
+                            <!-- Right Side -->
+                            <div class="col-lg-4">
+                                <div class="card-custom p-3 mb-3">
+                                    <div class="profile-stats-card ps-3">
+                                        <p class="text-muted mb-1">Total Pesanan Hari Ini</p>
+                                        <h4 class="fw-bold" id="profile-total-orders">0</h4>
+                                    </div>
+                                </div>
+                                <div class="card-custom p-3">
+                                     <div class="profile-stats-card ps-3">
+                                        <p class="text-muted mb-1">Total Pendapatan Hari Ini</p>
+                                        <h4 class="fw-bold" id="profile-total-income">Rp 0</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mt-4 mb-3">
+                            <h3 class="fw-bold">Produk Anda</h3>
+                            <div>
+                                <button class="btn action-button me-2" onclick="openEditProfileModal()"><i class="bi bi-gear-fill me-2"></i>Edit Profil</button>
+                                <button class="btn action-button" onclick="openAddProductModal()"><i class="bi bi-plus-circle-fill me-2"></i>Tambah Produk</button>
+                            </div>
+                        </div>
+
+                        <div id="product-list" class="row g-4">
+                           <!-- Daftar produk akan di-render oleh JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <!-- Chat Section (UPDATED) -->
+                    <div id="chat-content" class="content-section d-none">
+                        <h2 class="mb-4 fw-bold">Chat Pelanggan</h2>
+                        <div class="card-custom" style="height: 60vh; display: flex; flex-direction: column;">
+                           <div class="p-3 border-bottom"><strong>Chat dengan Pelanggan #1203</strong></div>
+                           <div class="p-3 flex-grow-1 chat-box" style="overflow-y: auto;">
+                               <!-- Initial messages are now correctly aligned -->
+                               <div class="chat-bubble chat-bubble-customer">
+                                   <span class="chat-bubble-name">Pelanggan</span>
+                                   Oke kak, ditunggu.
+                               </div>
+                               <div class="chat-bubble chat-bubble-admin">
+                                   <span class="chat-bubble-name">Anda</span>
+                                   Halo, pesanan Anda sedang kami siapkan ya.
+                               </div>
+                           </div>
+                           <div class="p-3 bg-light border-top">
+                                <form class="input-group" onsubmit="event.preventDefault(); sendChatMessage();">
+                                   <input type="text" class="form-control" placeholder="Ketik pesan...">
+                                   <button class="btn btn-brand" type="submit"><i class="bi bi-send-fill"></i></button>
+                               </form>
+                           </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Page Elements
+        const splashScreen = document.getElementById('splashScreen');
+        const landingPage = document.getElementById('landingPage');
+        const authPage = document.getElementById('authPage');
+        const dashboardPage = document.getElementById('dashboardPage');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        
+        // Modals
+        const verificationModal = new bootstrap.Modal(document.getElementById('verificationModal'));
+        const slotUpdateModal = new bootstrap.Modal(document.getElementById('slotUpdateModal'));
+        const profileUpdateModal = new bootstrap.Modal(document.getElementById('profileUpdateModal'));
+        const umkmModal = new bootstrap.Modal(document.getElementById('umkmModal'));
+        const addProductModal = new bootstrap.Modal(document.getElementById('addProductModal'));
+        const editProfileModal = new bootstrap.Modal(document.getElementById('editProfileModal'));
+        const replyModal = new bootstrap.Modal(document.getElementById('replyModal'));
+
+        // Chat Elements
+        const chatInput = document.querySelector('#chat-content input');
+        const chatBox = document.querySelector('#chat-content .chat-box');
+
+        // State and Data Management
+        let currentUser = {};
+        let notificationCount = 0; 
+
+        const mockUsers = {
+            'kopi@gmail.com': { name: 'Kopi Tuku', password: 'password' },
+            'futago@gmail.com': { name: 'Futago Ya!', password: 'password' },
+            'kondang@gmail.com': { name: 'Mie Kondang', password: 'password' },
+            'photomatics@gmail.com': { name: 'Photomatics Studio', password: 'password' },
+            'tohangs@gmail.com': { name: 'Tohangs Barber', password: 'password' },
+        };
+        
+        // Revisi: Menambahkan data pieChartColors untuk setiap merchant
+        const merchantPieChartColors = {
+            'Kopi Tuku': ['#0075F2', '#FFA500', '#20c997'], // Biru, Oranye, Hijau Tosca
+            'Futago Ya!': ['#800000', '#FFD700', '#20c997'], // Merah Marun, Kuning, Hijau Tosca
+            'Mie Kondang': ['#FFA500', '#FFD700', '#D2B48C'], // Oranye, Kuning, Coklat Teh
+            'Photomatics Studio': ['#808080', '#ADD8E6', '#F5DEB3'], // Abu-abu, Biru Muda, Krem
+            'Tohangs Barber': ['#000000', '#C0C0C0', '#00008B', '#556B2F'], // Hitam, Silver, Biru Gelap, Hijau Zaitun
+        };
+
+        const merchantData = {
+          'Futago Ya!': {
+            products: [
+              { name: 'Ramen Original', price: 58000, image: 'https://images.unsplash.com/photo-1552633604-a149903a234f?q=80&w=1974&auto=format&fit=crop', salesTrend: [80, 95, 110, 105, 130] },
+              { name: 'Ramen Katsu Curry', price: 65000, image: 'https://images.unsplash.com/photo-1598514983318-72a35b848243?q=80&w=2070&auto=format&fit=crop', salesTrend: [60, 70, 85, 90, 100] },
+              { name: 'Ocha Dingin', price: 12000, image: 'https://images.unsplash.com/photo-1627462329392-56c45963c5a5?q=80&w=1964&auto=format&fit=crop', salesTrend: [150, 160, 180, 170, 200] },
+            ],
+            orders: [
+              { id: 101, name: 'Bambang P.', items: [{ name: 'Ramen Original', qty: 2 }, { name: 'Ocha Dingin', qty: 2 }], type: 'Dine In', status: 'Selesai' },
+              { id: 102, name: 'Citra L.', items: [{ name: 'Ramen Katsu Curry', qty: 1 }], type: 'Take Away', status: 'Menunggu' },
+              { id: 103, name: 'Dewi S.', items: [{ name: 'Ramen Original', qty: 1 }, { name: 'Ramen Katsu Curry', qty: 1 }], type: 'Dine In', status: 'Menunggu' },
+              { id: 104, name: 'Eko W.', items: [{ name: 'Ocha Dingin', qty: 3 }], type: 'Take Away', status: 'Menunggu' },
+            ],
+            pieChartData: { labels: ['Ramen Original', 'Ramen Katsu Curry', 'Ocha Dingin'], data: [50, 35, 15] }
+          },
+          'Mie Kondang': {
+            products: [
+              { name: 'Mie Ayam Bakso', price: 25000, image: 'https://images.unsplash.com/photo-1585032226651-759b368d7246?q=80&w=1996&auto=format&fit=crop', salesTrend: [200, 220, 250, 230, 280] },
+              { name: 'Pangsit Goreng', price: 15000, image: 'https://images.unsplash.com/photo-1626078297422-5453381691f6?q=80&w=1974&auto=format&fit=crop', salesTrend: [150, 170, 160, 190, 210] },
+              { name: 'Es Teh Manis', price: 5000, image: 'https://images.unsplash.com/photo-1596701923933-2cde3541ce1f?q=80&w=1964&auto=format&fit=crop', salesTrend: [300, 350, 400, 380, 420] },
+            ],
+            orders: [
+              { id: 201, name: 'Fajar N.', items: [{ name: 'Mie Ayam Bakso', qty: 1 }, { name: 'Es Teh Manis', qty: 1 }], type: 'Dine In', status: 'Selesai' },
+              { id: 202, name: 'Gita P.', items: [{ name: 'Pangsit Goreng', qty: 2 }], type: 'Take Away', status: 'Selesai' },
+              { id: 203, name: 'Hadi W.', items: [{ name: 'Mie Ayam Bakso', qty: 2 }, { name: 'Pangsit Goreng', qty: 1 }, { name: 'Es Teh Manis', qty: 2 }], type: 'Dine In', status: 'Menunggu' },
+              { id: 204, name: 'Indah K.', items: [{ name: 'Mie Ayam Bakso', qty: 1 }], type: 'Take Away', status: 'Menunggu' },
+            ],
+            pieChartData: { labels: ['Mie Ayam Bakso', 'Pangsit Goreng', 'Es Teh Manis'], data: [60, 25, 15] }
+          },
+          'Kopi Tuku': {
+            products: [
+              { name: 'Es Kopi Susu Tetangga', price: 18000, image: 'https://images.unsplash.com/photo-1557142046-c704a3adf364?q=80&w=1964&auto=format&fit=crop', salesTrend: [120, 150, 180, 170, 200] },
+              { name: 'Americano', price: 22000, image: 'https://images.unsplash.com/photo-1511920183234-2b2b62b77c3a?q=80&w=1974&auto=format&fit=crop', salesTrend: [50, 60, 55, 70, 80] },
+              { name: 'Donat Kampung', price: 15000, image: 'https://images.unsplash.com/photo-1551106374-b5a0c8c6a08f?q=80&w=1974&auto=format&fit=crop', salesTrend: [80, 90, 110, 100, 120] },
+            ],
+            orders: [
+              { id: 301, name: 'Joko S.', items: [{ name: 'Es Kopi Susu Tetangga', qty: 1 }, { name: 'Donat Kampung', qty: 2 }], type: 'Take Away', status: 'Selesai' },
+              { id: 302, name: 'Kartika A.', items: [{ name: 'Americano', qty: 1 }], type: 'Dine In', status: 'Menunggu' },
+              { id: 303, name: 'Lia M.', items: [{ name: 'Es Kopi Susu Tetangga', qty: 1 }], type: 'Take Away', status: 'Menunggu' },
+              { id: 304, name: 'Mega W.', items: [{ name: 'Donat Kampung', qty: 3 }], type: 'Take Away', status: 'Menunggu' },
+              { id: 305, name: 'Nanda P.', items: [{ name: 'Americano', qty: 1 }, { name: 'Donat Kampung', qty: 1 }], type: 'Dine In', status: 'Menunggu' },
+            ],
+            pieChartData: { labels: ['Es Kopi Susu Tetangga', 'Americano', 'Donat Kampung'], data: [65, 20, 15] }
+          },
+          'Photomatics Studio': {
+            products: [
+              { name: 'Paket Foto Standar', price: 50000, image: 'https://images.unsplash.com/photo-1520341793344-3c817d1f14a6?q=80&w=2070&auto=format&fit=crop', salesTrend: [40, 50, 65, 60, 75] },
+              { name: 'Paket Foto Grup', price: 85000, image: 'https://images.unsplash.com/photo-1521143183592-a1b8a53578b8?q=80&w=2070&auto=format&fit=crop', salesTrend: [20, 25, 30, 40, 50] },
+              { name: 'Cetak Foto Tambahan', price: 15000, image: 'https://images.unsplash.com/photo-151639728-1e4282a0b1c9?q=80&w=2070&auto=format&fit=crop', salesTrend: [100, 120, 150, 130, 180] },
+            ],
+            orders: [
+                { id: 401, name: 'Olivia R.', items: [{ name: 'Paket Foto Standar', qty: 1 }], type: 'Jasa', status: 'Selesai' },
+                { id: 402, name: 'Putri C.', items: [{ name: 'Paket Foto Grup', qty: 1 }, {name: 'Cetak Foto Tambahan', qty: 3}], type: 'Jasa', status: 'Menunggu' },
+                { id: 403, name: 'Qori A.', items: [{ name: 'Paket Foto Standar', qty: 1 }, { name: 'Cetak Foto Tambahan', qty: 5 }], type: 'Jasa', status: 'Menunggu' },
+            ],
+            pieChartData: { labels: ['Paket Foto Standar', 'Paket Foto Grup', 'Cetak Foto Tambahan'], data: [45, 30, 25] }
+          },
+          'Tohangs Barber': {
+            products: [
+              { name: 'Potong Rambut Pria', price: 75000, image: 'https://images.unsplash.com/photo-1622288094043-4f11fe4a4282?q=80&w=1974&auto=format&fit=crop', salesTrend: [90, 100, 110, 130, 150] },
+              { name: 'Cukur Jenggot & Kumis', price: 40000, image: 'https://images.unsplash.com/photo-1621605815971-fbc5406a2e4b?q=80&w=1974&auto=format&fit=crop', salesTrend: [50, 60, 70, 65, 80] },
+              { name: 'Paket Lengkap', price: 100000, image: 'https://images.unsplash.com/photo-1622288094043-4f11fe4a4282?q=80&w=1974&auto=format&fit=crop', salesTrend: [40, 55, 60, 75, 90] },
+              { name: 'Hair Tonic Massage', price: 30000, image: 'https://images.unsplash.com/photo-1599351431202-15a671329c3f?q=80&w=2070&auto=format&fit=crop', salesTrend: [30, 40, 50, 45, 60] },
+            ],
+             orders: [
+                { id: 501, name: 'Rama D.', items: [{ name: 'Potong Rambut Pria', qty: 1 }], type: 'Jasa', status: 'Selesai' },
+                { id: 502, name: 'Sandi F.', items: [{ name: 'Paket Lengkap', qty: 1 }], type: 'Jasa', status: 'Menunggu' },
+                { id: 503, name: 'Toni Y.', items: [{ name: 'Cukur Jenggot & Kumis', qty: 1 }, {name: 'Hair Tonic Massage', qty: 1}], type: 'Jasa', status: 'Menunggu' },
+             ],
+             pieChartData: { labels: ['Potong Rambut Pria', 'Paket Lengkap', 'Cukur Jenggot & Kumis', 'Hair Tonic Massage'], data: [45, 25, 20, 10] }
+          },
+        };
+
+        const merchantReviews = {
+            'Futago Ya!': [
+                { id: 1, name: 'Rina A.', avatarInitial: 'R', rating: 5, text: 'Ramennya otentik banget! Kuahnya kaya rasa dan mienya pas kenyalnya. Pasti balik lagi!', timestamp: '1 hari lalu' },
+                { id: 2, name: 'Budi S.', avatarInitial: 'B', rating: 4.5, text: 'Chicken katsu curry-nya favorit! Porsinya besar dan saus curry-nya mantap.', timestamp: '2 hari lalu' },
+                { id: 3, name: 'Cindy M.', avatarInitial: 'C', rating: 4, text: 'Tempatnya agak kecil tapi nyaman. Ocha-nya bisa refill jadi plus poin!', timestamp: '3 hari lalu' },
+            ],
+            'Mie Kondang': [
+                { id: 1, name: 'Agus W.', avatarInitial: 'A', rating: 5, text: 'Mie ayam legend, rasanya ga pernah berubah dari dulu. Selalu jadi pilihan utama.', timestamp: '1 hari lalu' },
+                { id: 2, name: 'Sari P.', avatarInitial: 'S', rating: 4, text: 'Pangsit gorengnya renyah dan isiannya banyak. Wajib coba!', timestamp: '2 hari lalu' },
+                { id: 3, name: 'Joko P.', avatarInitial: 'J', rating: 4.5, text: 'Harga sangat terjangkau untuk rasa yang seenak ini. Baksonya juga terasa dagingnya.', timestamp: '4 hari lalu' },
+            ],
+            'Kopi Tuku': [
+                { id: 1, name: 'Dewi K.', avatarInitial: 'D', rating: 5, text: 'Es Kopi Susu Tetangga-nya memang juara! Manis dan kopinya pas banget.', timestamp: '6 jam lalu' },
+                { id: 2, name: 'Reza F.', avatarInitial: 'R', rating: 4, text: 'Tempatnya asik buat kerja, wifinya kenceng. Americano-nya strong, suka!', timestamp: '1 hari lalu' },
+                { id: 3, name: 'Lina H.', avatarInitial: 'L', rating: 4.5, text: 'Donat kampungnya empuk dan gak terlalu manis, cocok banget sama kopi.', timestamp: '2 hari lalu' },
+            ],
+            'Photomatics Studio': [
+                { id: 1, name: 'Andi R.', avatarInitial: 'A', rating: 5, text: 'Hasil fotonya bagus banget, tajam dan warnanya pas. Fotografernya juga ramah dan bisa mengarahkan gaya.', timestamp: '2 hari lalu' },
+                { id: 2, name: 'Berliana S.', avatarInitial: 'B', rating: 4.5, text: 'Studionya nyaman, bersih, dan propertinya cukup lengkap untuk foto grup.', timestamp: '3 hari lalu' },
+                { id: 3, name: 'Kevin T.', avatarInitial: 'K', rating: 5, text: 'Proses dari foto sampai cetak cepat. Kualitas cetakannya juga memuaskan. Recommended!', timestamp: '5 hari lalu' },
+            ],
+            'Tohangs Barber': [
+                { id: 1, name: 'Gilang P.', avatarInitial: 'G', rating: 5, text: 'Potongan rambutnya selalu rapi dan sesuai dengan yang saya mau. Barbernya sangat profesional.', timestamp: '1 hari lalu' },
+                { id: 2, name: 'Ferry M.', avatarInitial: 'F', rating: 4.5, text: 'Paket komplitnya worth it banget. Pijatnya bikin rileks setelah potong rambut.', timestamp: '3 hari lalu' },
+                { id: 3, name: ' Chandra W.', avatarInitial: 'C', rating: 5, text: 'Tempatnya bersih, peralatannya steril. Selalu jadi andalan buat cukur jenggot.', timestamp: '1 minggu lalu' },
+            ],
+        };
+
+        function showAuthPage() {
+            landingPage.classList.add('d-none');
+            authPage.classList.add('d-none'); 
+
+            splashScreen.classList.remove('d-none');
+            splashScreen.style.opacity = '1';
+
+            setTimeout(() => {
+                splashScreen.style.opacity = '0';
+                setTimeout(() => {
+                    splashScreen.classList.add('d-none');
+                    authPage.classList.remove('d-none');
+                }, 500);
+            }, 1500);
+        }
+
+        function showRegisterForm() {
+            loginForm.classList.add('d-none');
+            registerForm.classList.remove('d-none');
+        }
+
+        function showLoginForm() {
+            registerForm.classList.add('d-none');
+            loginForm.classList.remove('d-none');
+        }
+
+        function handleAuth(authType) {
+            const verificationMessage = document.getElementById('verificationMessage');
+            if (authType === 'login') {
+                const businessName = document.getElementById('loginBusinessName').value;
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+
+                const user = mockUsers[email.toLowerCase()];
+                
+                if (user && password === user.password && user.name.toLowerCase() === businessName.toLowerCase()) {
+                    currentUser.name = user.name;
+                    verificationMessage.textContent = 'Berhasil login!';
+                } else {
+                    alert('Nama UMKM, Email, atau Password salah. Silakan coba lagi.');
+                    return;
+                }
+            } else { // register
+                const businessName = document.getElementById('registerName').value;
+                currentUser.name = businessName;
+                verificationMessage.textContent = 'Pendaftaran berhasil!';
+                const email = document.getElementById('registerEmail').value;
+                if(email && !mockUsers[email.toLowerCase()]) {
+                   mockUsers[email.toLowerCase()] = { name: businessName, password: 'password' };
+                   merchantData[businessName] = { products: [], orders: [], pieChartData: { labels: [], data: [] } }; // Tambah data kosong
+                   merchantReviews[businessName] = [];
+                }
+            }
+
+            verificationModal.show();
+            setTimeout(() => {
+                verificationModal.hide();
+                authPage.classList.add('d-none');
+                dashboardPage.classList.remove('d-none');
+                updateDashboardUI();
+                checkOverloadStatus();
+                showSection('dashboard', document.querySelector('.sidebar .nav-link.active'));
+            }, 2000);
+        }
+        
+        function logout() {
+            dashboardPage.classList.add('d-none');
+            
+            splashScreen.classList.remove('d-none');
+            splashScreen.style.opacity = '1';
+
+            setTimeout(() => {
+                splashScreen.style.opacity = '0';
+                setTimeout(() => {
+                    splashScreen.classList.add('d-none');
+                    landingPage.classList.remove('d-none');
+                    showLoginForm();
+                }, 500);
+            }, 1500);
+        }
+        
+        function updateSlot() {
+            const newCapacity = document.getElementById('slot-capacity-input').value;
+            slotUpdateModal.show();
+            
+            const message = `Slot antrean telah diperbarui menjadi ${newCapacity}.`;
+            addNotification({
+                title: 'Update Slot',
+                title_color: 'text-info',
+                icon: 'bi-sliders',
+                message: message,
+                status_text: `Kapasitas: ${newCapacity}`,
+                status_color: 'text-info',
+                timestamp: 'Baru saja'
+            }, true);
+            checkOverloadStatus(); // Re-check overload status after update
+        }
+
+        function updateProfile() {
+            const newName = document.getElementById('edit-profile-name-input').value;
+            currentUser.name = newName; // Persist the final name
+            updateDashboardUI(); // Final update just in case
+            editProfileModal.hide();
+            profileUpdateModal.show();
+        }
+        
+        function openEditProfileModal() {
+            document.getElementById('edit-profile-name-input').value = currentUser.name;
+            document.getElementById('edit-profile-email-input').value = currentUser.email || 'user@gmail.com';
+            document.getElementById('edit-profile-phone-input').value = currentUser.phone || '08123456789';
+            handleProfileNameChange(currentUser.name); // Sync UI on open
+            editProfileModal.show();
+        }
+        
+        function openAddProductModal() {
+            document.getElementById('addProductForm').reset();
+            addProductModal.show();
+        }
+        
+        function addProduct() {
+            const name = document.getElementById('productName').value;
+            const price = document.getElementById('productPrice').value;
+            let image = document.getElementById('productImage').value;
+
+            if (!name || !price) {
+                alert('Nama dan Harga produk wajib diisi.');
+                return;
+            }
+            if (!image) {
+                image = `https://placehold.co/600x400/cccccc/ffffff?text=${encodeURIComponent(name)}`;
+            }
+
+            const currentMerchantData = merchantData[currentUser.name];
+            if (currentMerchantData) {
+                currentMerchantData.products.push({ name, price: parseInt(price), image, salesTrend: [0,0,0,0,0] });
+                renderProfilPage(currentUser.name);
+            }
+            
+            addProductModal.hide();
+        }
+        
+        function sendChatMessage() {
+            const messageText = chatInput.value.trim();
+            if (messageText === '') return;
+
+            const userMessageDiv = document.createElement('div');
+            userMessageDiv.classList.add('chat-bubble', 'chat-bubble-admin');
+            userMessageDiv.innerHTML = `<span class="chat-bubble-name">Anda</span>${messageText}`;
+            chatBox.appendChild(userMessageDiv);
+
+            chatInput.value = '';
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            setTimeout(() => {
+                const replyMessageDiv = document.createElement('div');
+                replyMessageDiv.classList.add('chat-bubble', 'chat-bubble-customer');
+                replyMessageDiv.innerHTML = `<span class="chat-bubble-name">Pelanggan</span>Siap, terima kasih infonya kak!`;
+                chatBox.appendChild(replyMessageDiv);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 1500);
+        }
+
+        function togglePasswordVisibility(fieldId, iconContainer) {
+            const passwordField = document.getElementById(fieldId);
+            const icon = iconContainer.querySelector('i');
+            
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                icon.classList.remove('bi-eye-slash-fill');
+                icon.classList.add('bi-eye-fill');
+            } else {
+                passwordField.type = 'password';
+                icon.classList.remove('bi-eye-fill');
+                icon.classList.add('bi-eye-slash-fill');
+            }
+        }
+        
+        function updateOrderStatus(button, orderId) {
+            const merchantOrders = merchantData[currentUser.name].orders;
+            const order = merchantOrders.find(o => o.id === orderId);
+            if (order) {
+                order.status = 'Selesai';
+                renderPesananPage(currentUser.name);
+            }
+        }
+
+        function openReplyModal(button) {
+            const reviewItem = button.closest('.list-group-item');
+            const reviewId = reviewItem.id;
+            document.getElementById('replyReviewId').value = reviewId;
+            document.getElementById('replyText').value = '';
+            replyModal.show();
+        }
+
+        function submitReply() {
+            const reviewId = document.getElementById('replyReviewId').value;
+            const replyText = document.getElementById('replyText').value;
+            
+            if (replyText.trim() === '') {
+                alert('Balasan tidak boleh kosong.');
+                return;
+            }
+
+            const reviewItem = document.getElementById(reviewId);
+            const replyContainer = reviewItem.querySelector('.reply-container');
+            
+            replyContainer.innerHTML = `
+                <div class="p-2 rounded" style="background-color: #e3f2fd; border-left: 3px solid var(--brand-blue);">
+                    <strong style="color: var(--brand-blue); font-size: 0.9em;">Balasan Anda:</strong>
+                    <p class="mb-0 fst-italic">${replyText}</p>
+                </div>`;
+
+            const replyButton = reviewItem.querySelector('button');
+            replyButton.style.display = 'none';
+            
+            replyModal.hide();
+        }
+
+        const umkmData = {
+            'Pesanan': [
+                { name: 'Bakmie Kondang', value: '350 Pesanan' },
+                { name: 'Kopi Tuku', value: '320 Pesanan' },
+                { name: 'Futago!', value: '280 Pesanan' },
+                { name: 'Photomatics', value: '210 Pesanan' },
+                { name: 'Tohangs Barber', value: '190 Pesanan' }
+            ],
+            'Pendapatan': [
+                { name: 'Kopi Tuku', value: 'Rp 4.5M' },
+                { name: 'Bakmie Kondang', value: 'Rp 4.1M' },
+                { name: 'Futago!', value: 'Rp 3.5M' },
+                { name: 'Tohangs Barber', value: 'Rp 3.2M' },
+                { name: 'Photomatics', value: 'Rp 2.5M' }
+            ],
+            'Rating': [
+                { name: 'Tohangs Barber', value: '4.9/5.0' },
+                { name: 'Kopi Tuku', value: '4.8/5.0' },
+                { name: 'Bakmie Kondang', value: '4.8/5.0' },
+                { name: 'Futago!', value: '4.7/5.0' },
+                { name: 'Photomatics', value: '4.6/5.0' }
+            ],
+            'Ulasan': [
+                { name: 'Futago!', value: '120 Ulasan' },
+                { name: 'Photomatics', value: '115 Ulasan' },
+                { name: 'Kopi Tuku', value: '98 Ulasan' },
+                { name: 'Bakmie Kondang', value: '95 Ulasan' },
+                { name: 'Tohangs Barber', value: '80 Ulasan' }
+            ]
+        };
+
+        function showUmkmList(category) {
+            const modalTitle = document.getElementById('umkmModalLabel');
+            const modalBody = document.getElementById('umkmModalBody');
+            modalTitle.textContent = `Top 5 UMKM Berdasarkan ${category}`;
+            const data = umkmData[category];
+            let content = '<ul class="list-group list-group-flush">';
+            if (data) {
+                data.forEach(item => {
+                    content += `<li class="list-group-item d-flex justify-content-between align-items-center">${item.name}<span class="badge bg-primary rounded-pill">${item.value}</span></li>`;
+                });
+            }
+            content += '</ul>';
+            modalBody.innerHTML = content;
+            umkmModal.show();
+        }
+
+        function showSection(sectionId, element) {
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.add('d-none');
+            });
+            const targetSection = document.getElementById(sectionId + '-content');
+            if (targetSection) {
+                targetSection.classList.remove('d-none');
+            }
+            document.querySelectorAll('.sidebar .nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            if (element) {
+                element.classList.add('active');
+            }
+        }
+
+        // Helper functions for dynamic content
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(amount);
+        }
+
+        function formatNumber(amount) {
+            return new Intl.NumberFormat('id-ID').format(amount);
+        }
+
+        function updateDashboardUI() {
+            if (!currentUser.name) return;
+
+            const firstInitial = currentUser.name.charAt(0).toUpperCase();
+            const avatarUrl = `https://placehold.co/100x100/F7F200/0075F2?text=${firstInitial}`;
+
+            // Header
+            document.getElementById('header-user-name').textContent = `Halo, ${currentUser.name}`;
+            document.getElementById('header-user-avatar').src = avatarUrl;
+            
+            // Profile Page
+            document.getElementById('profile-greeting').textContent = `Hi ${currentUser.name}!`;
+
+            // Edit Profile Modal (sync names)
+            handleProfileNameChange(currentUser.name);
+
+            // Render content specific to the merchant
+            renderPesananPage(currentUser.name);
+            renderProfilPage(currentUser.name);
+            renderUlasanPage(currentUser.name); 
+            updateNotificationBadge();
+            updateSalesTrendChart(currentUser.name);
+            updateProductPieChart(currentUser.name);
+        }
+
+        function renderPesananPage(merchantName) {
+            const data = merchantData[merchantName];
+            if (!data) return;
+
+            const summaryBar = document.getElementById('pesanan-summary-bar');
+            const tableBody = document.getElementById('queue-table-body');
+            
+            let totalQueue = 0;
+            let totalCompleted = 0;
+            let totalTransaction = 0;
+            let totalSalesUnit = 0;
+
+            data.orders.forEach(order => {
+                if (order.status === 'Menunggu') {
+                    totalQueue++;
+                } else {
+                    totalCompleted++;
+                }
+                const orderTotal = order.items.reduce((sum, item) => {
+                    const product = data.products.find(p => p.name === item.name);
+                    totalSalesUnit += item.qty;
+                    return sum + (product ? product.price * item.qty : 0);
+                }, 0);
+                totalTransaction += orderTotal;
+            });
+            
+            const avgRating = (merchantReviews[merchantName] || []).reduce((sum, review) => sum + review.rating, 0) / (merchantReviews[merchantName]?.length || 1);
+
+            // Revisi: Memastikan semua kartu summary dirender dengan benar
+            summaryBar.innerHTML = `
+                <div class="col-md-3"><div class="order-summary-card"><div class="value">${formatNumber(totalQueue)}</div><div class="title">Jumlah Antrean</div></div></div>
+                <div class="col-md-3"><div class="order-summary-card"><div class="value">${formatNumber(totalCompleted)}</div><div class="title">Pesanan Selesai</div></div></div>
+                <div class="col-md-3"><div class="order-summary-card"><div class="value">${formatCurrency(totalTransaction)}</div><div class="title">Total Transaksi</div></div></div>
+                <div class="col-md-3"><div class="order-summary-card"><div class="value">${avgRating.toFixed(1)} <i class="bi bi-star-fill" style="font-size: 1.5rem;"></i></div><div class="title">Rating Rata-rata</div></div></div>
+            `;
+            
+            // Revisi: Menyeragamkan format angka di semua bagian
+            document.getElementById('dashboard-total-pendapatan').textContent = formatCurrency(totalTransaction);
+            document.getElementById('dashboard-total-order').textContent = formatNumber(data.orders.length);
+            document.getElementById('dashboard-rating-rata2').innerHTML = `${avgRating.toFixed(1)} <i class="bi bi-star-fill" style="font-size: 1.2rem;"></i>`;
+            document.getElementById('profile-total-orders').textContent = formatNumber(data.orders.length);
+            document.getElementById('profile-total-income').textContent = formatCurrency(totalTransaction);
+            document.getElementById('dashboard-total-sales-value').textContent = `${formatNumber(totalSalesUnit)} unit terjual`;
+            document.getElementById('stats-monthly-income').textContent = formatCurrency(totalTransaction);
+            document.getElementById('stats-total-customers').textContent = formatNumber(data.orders.length);
+
+            tableBody.innerHTML = '';
+            data.orders.forEach(order => {
+                const itemsString = order.items.map(item => `${item.name} ${item.qty}x`).join(', ');
+                const orderTotal = order.items.reduce((sum, item) => {
+                    const product = data.products.find(p => p.name === item.name);
+                    return sum + (product ? product.price * item.qty : 0);
+                }, 0);
+
+                const statusBadge = order.status === 'Selesai' 
+                    ? `<span class="badge bg-success badge-status">Selesai</span>`
+                    : `<span class="badge bg-warning text-dark badge-status">Menunggu</span>`;
+                
+                const actionButton = order.status === 'Selesai'
+                    ? `<button class="btn btn-sm btn-secondary" disabled>Selesai</button>`
+                    : `<button class="btn btn-sm btn-primary" onclick="updateOrderStatus(this, ${order.id})">Next</button>`;
+
+                const row = `
+                    <tr>
+                        <th scope="row">#${order.id}</th>
+                        <td>${order.name}</td>
+                        <td>${itemsString}</td>
+                        <td>${formatCurrency(orderTotal)}</td>
+                        <td>${order.type}</td>
+                        <td>${statusBadge}</td>
+                        <td>${actionButton}</td>
+                    </tr>
+                `;
+                tableBody.innerHTML += row;
+            });
+            checkOverloadStatus();
+        }
+        
+        function renderProfilPage(merchantName) {
+            const data = merchantData[merchantName];
+            if (!data || !data.products) return;
+
+            const productList = document.getElementById('product-list');
+            productList.innerHTML = '';
+
+            if (data.products.length === 0) {
+                 productList.innerHTML = `<div class="col-12"><p class="text-center text-muted">Anda belum memiliki produk.</p></div>`;
+                 return;
+            }
+
+            data.products.forEach(product => {
+                const card = `
+                    <div class="col-md-4">
+                        <div class="card product-card shadow-sm">
+                            <img src="${product.image}" class="card-img-top" alt="${product.name}">
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold">${product.name}</h5>
+                                <p class="card-text fw-bold" style="color: var(--brand-blue);">${formatCurrency(product.price)}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                productList.innerHTML += card;
+            });
+        }
+
+        function renderUlasanPage(merchantName) {
+            const reviewsData = merchantReviews[merchantName] || [];
+            const dashboardList = document.getElementById('dashboard-review-list');
+            const mainList = document.getElementById('main-review-list');
+            dashboardList.innerHTML = '';
+            mainList.innerHTML = '';
+
+            if (reviewsData.length === 0) {
+                const noReviewMsg = '<p class="text-muted text-center">Belum ada ulasan.</p>';
+                dashboardList.innerHTML = noReviewMsg;
+                mainList.innerHTML = noReviewMsg;
+                return;
+            }
+
+            reviewsData.forEach(review => {
+                const ratingStars = getStarRating(review.rating);
+                 const dashboardItem = `
+                    <div class="d-flex align-items-start mb-3">
+                        <img src="https://placehold.co/50x50/0075F2/FFFFFF?text=${review.avatarInitial}" class="rounded-circle me-3" alt="Avatar">
+                        <div class="w-100">
+                            <div class="d-flex justify-content-between">
+                                <h6 class="mb-0 fw-bold">${review.name}</h6>
+                                <div>${ratingStars}</div>
+                            </div>
+                            <small class="text-muted">${review.text}</small>
+                        </div>
+                    </div><hr>`;
+                dashboardList.innerHTML += dashboardItem;
+                
+                const mainItem = `
+                    <div id="review-${review.id}" class="list-group-item list-group-item-action p-3 mb-3" style="border-radius:var(--card-radius);">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1"><img src="https://placehold.co/40x40/0075F2/FFFFFF?text=${review.avatarInitial}" class="rounded-circle me-2" alt="Avatar"> ${review.name}</h5>
+                            <small>${review.timestamp}</small>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p class="mb-1 ms-5">"${review.text}"</p>
+                            <div>${ratingStars}</div>
+                        </div>
+                        <div class="mt-2 ms-5">
+                            <button class="btn btn-outline-primary btn-sm" onclick="openReplyModal(this)">Balas</button>
+                        </div>
+                        <div class="reply-container mt-3 ms-5"></div>
+                    </div>`;
+                mainList.innerHTML += mainItem;
+            });
+        }
+        
+        function getStarRating(rating) {
+            let stars = '';
+            for(let i = 1; i <= 5; i++) {
+                if (rating >= i) {
+                    stars += '<i class="bi bi-star-fill text-warning"></i>';
+                } else if (rating >= i - 0.5) {
+                    stars += '<i class="bi bi-star-half text-warning"></i>';
+                } else {
+                    stars += '<i class="bi bi-star text-warning"></i>';
+                }
+            }
+            return stars;
+        }
+
+        function addNotification(notif, prepend = false) {
+            notificationCount++;
+            updateNotificationBadge();
+            const notificationList = document.getElementById('notification-list');
+            const notifElement = document.createElement('div');
+            notifElement.className = 'list-group-item list-group-item-action p-3';
+            notifElement.style = "border-radius:var(--card-radius); margin-bottom: 1rem; border-left: 3px solid var(--brand-blue);";
+            if (notif.id) notifElement.id = notif.id;
+
+            notifElement.innerHTML = `
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1 ${notif.title_color || ''}"><i class="bi ${notif.icon} me-2"></i>${notif.title}</h5>
+                    <small class="text-muted">${notif.timestamp}</small>
+                </div>
+                <p class="mb-1">${notif.message}</p>
+                <small class="${notif.status_color || ''} fw-bold">${notif.status_text}</small>
+            `;
+            if(prepend) {
+                notificationList.prepend(notifElement);
+            } else {
+                notificationList.appendChild(notifElement);
+            }
+        }
+
+        function checkOverloadStatus() {
+            const capacity = parseInt(document.getElementById('slot-capacity-input').value, 10);
+            const data = merchantData[currentUser.name];
+            if (!data) return;
+
+            const waitingOrders = data.orders.filter(o => o.status === 'Menunggu').length;
+            
+            const existingNotif = document.getElementById('dynamic-overload-notification');
+
+            if (waitingOrders > capacity) {
+                if (!existingNotif) { // Only add if it doesn't exist
+                    const message = `Antrean telah mencapai ${waitingOrders} pesanan, melebihi kapasitas Anda (${capacity}). Pertimbangkan untuk menonaktifkan pesanan sementara.`;
+                    addNotification({
+                      id: 'dynamic-overload-notification', 
+                      title: 'Peringatan: Antrean Penuh',
+                      title_color: 'text-danger',
+                      icon: 'bi-exclamation-triangle-fill',
+                      message: message,
+                      status_text: 'Status: Overload',
+                      status_color: 'text-danger',
+                      timestamp: 'Baru saja'
+                    }, true); 
+                }
+            } else {
+                if (existingNotif) { 
+                    existingNotif.remove();
+                }
+            }
+        }
+
+        function updateNotificationBadge() {
+            const badge = document.getElementById('notification-badge');
+            if (notificationCount > 0) {
+                badge.textContent = notificationCount;
+                badge.style.display = 'inline-block';
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+        
+        function handleNotificationClick() {
+             notificationCount = 0;
+             updateNotificationBadge();
+             showSection('notifikasi', document.querySelector('.sidebar a[onclick*="notifikasi"]'));
+        }
+
+        function handleProfileNameChange(newName) {
+            const firstInitial = newName.charAt(0).toUpperCase() || '?';
+            const avatarUrl = `https://placehold.co/100x100/F7F200/0075F2?text=${firstInitial}`;
+
+            document.getElementById('header-user-name').textContent = `Halo, ${newName}`;
+            document.getElementById('header-user-avatar').src = avatarUrl;
+            document.getElementById('profile-greeting').textContent = `Hi ${newName}!`;
+            document.getElementById('edit-profile-avatar').src = `https://placehold.co/200x200/F7F200/0075F2?text=${firstInitial}`;
+            document.getElementById('edit-profile-name-title').textContent = newName;
+        }
+
+        function updateSalesTrendChart(merchantName) {
+            const data = merchantData[merchantName];
+            if (!data || !data.products || data.products.length === 0) {
+                const emptyData = { labels: [], datasets: [] };
+                if (dashboardSalesChart) { dashboardSalesChart.data = emptyData; dashboardSalesChart.update(); }
+                if (monthlySalesLineChart) { monthlySalesLineChart.data = emptyData; monthlySalesLineChart.update(); }
+                return;
+            }
+
+            const productColors = ['#0075F2', '#F7B300', '#20E0A0', '#E02020', '#A020E0'];
+
+            const newDatasets = data.products.map((product, index) => ({
+                label: product.name,
+                data: product.salesTrend,
+                borderColor: productColors[index % productColors.length],
+                tension: 0.4,
+                fill: false
+            }));
+
+            const newChartData = {
+                labels: ['Maret', 'April', 'Mei', 'Juni', 'Juli'],
+                datasets: newDatasets
+            };
+
+            if (dashboardSalesChart) {
+                dashboardSalesChart.data = newChartData;
+                dashboardSalesChart.update();
+            }
+
+            if (monthlySalesLineChart) {
+                monthlySalesLineChart.data = newChartData;
+                monthlySalesLineChart.update();
+            }
+        }
+
+        // Revisi: Memperbarui fungsi pie chart agar warnanya dinamis
+        function updateProductPieChart(merchantName) {
+            const data = merchantData[merchantName];
+            const colors = merchantPieChartColors[merchantName] || ['#0075F2', '#6CB2F2', '#F7F200', '#F7B300']; // Warna default
+
+            if (!data || !data.pieChartData) {
+                const emptyData = { labels: [], datasets: [{ data: [], backgroundColor: colors }] };
+                if(productPieChart) {
+                    productPieChart.data = emptyData;
+                    productPieChart.update();
+                }
+                return;
+            }
+            if (productPieChart) {
+                productPieChart.data.labels = data.pieChartData.labels;
+                productPieChart.data.datasets[0].data = data.pieChartData.data;
+                productPieChart.data.datasets[0].backgroundColor = colors; // Terapkan warna spesifik merchant
+                productPieChart.update();
+            }
+        }
+        
+        let dashboardSalesChart, monthlySalesLineChart, productPieChart, monthlyIncomeBarChart;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                splashScreen.style.opacity = '0';
+                setTimeout(() => {
+                    splashScreen.classList.add('d-none');
+                    landingPage.classList.remove('d-none');
+                }, 500);
+            }, 2500);
+            
+            const initialNotifs = document.querySelectorAll('#notification-list > .list-group-item');
+            notificationCount = initialNotifs.length;
+            updateNotificationBadge();
+            
+            // --- CHARTS INITIALIZATION ---
+            
+            const initialLineData = {
+                labels: ['Maret', 'April', 'Mei', 'Juni', 'Juli'],
+                datasets: []
+            };
+
+             const initialPieData = {
+                labels: [],
+                datasets: [{ data: [], backgroundColor: [] }] // Kosongkan, akan diisi oleh fungsi update
+            };
+
+            const monthlyIncomeData = {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
+                datasets: [{ 
+                    label: 'Pemasukan', 
+                    data: [550000, 890000, 1200000, 980000, 1500000, 1300000, 1750000, 1600000, 1800000, 1550000, 1400000, 1650000], 
+                    backgroundColor: 'rgba(0, 117, 242, 0.8)', 
+                    borderRadius: 8, 
+                }]
+            };
+
+            const chartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                // Format Y-axis untuk currency pada grafik bar
+                                if (this.chart.config.type === 'bar') {
+                                    return 'Rp ' + new Intl.NumberFormat('id-ID').format(value / 1000) + 'k';
+                                }
+                                return value;
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                     // Format tooltip untuk currency pada grafik bar
+                                    if(context.chart.config.type === 'bar'){
+                                        label += formatCurrency(context.parsed.y);
+                                    } else {
+                                        label += formatNumber(context.parsed.y) + ' unit';
+                                    }
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            };
+
+            if(document.getElementById('dashboardSalesChart')) {
+                dashboardSalesChart = new Chart(document.getElementById('dashboardSalesChart'), {
+                    type: 'line', data: initialLineData, options: chartOptions
+                });
+            }
+            if(document.getElementById('monthlySalesLineChart')) {
+                 monthlySalesLineChart = new Chart(document.getElementById('monthlySalesLineChart'), {
+                    type: 'line', data: initialLineData, options: chartOptions
+                });
+            }
+            if(document.getElementById('productPieChart')) {
+                productPieChart = new Chart(document.getElementById('productPieChart'), {
+                    type: 'pie', data: initialPieData, options: { responsive: true, maintainAspectRatio: false }
+                });
+            }
+            if(document.getElementById('monthlyIncomeBarChart')) {
+                monthlyIncomeBarChart = new Chart(document.getElementById('monthlyIncomeBarChart'), {
+                    type: 'bar', data: monthlyIncomeData, options: chartOptions
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+
+
