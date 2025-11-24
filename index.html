@@ -25,30 +25,60 @@
     }
     body{
       font-family: "Helvetica", Helvetica, Arial, sans-serif;
-      background: var(--brand-white); /* Ubah background utama jadi putih */
+      background: var(--brand-white);
       color: var(--dark-text);
       -webkit-font-smoothing: antialiased;
       margin:0;
       overflow-x: hidden;
     }
     
-    /* --- Splash Screen --- */
+    /* --- Splash Screen Animation (Diperbarui) --- */
     #splashScreen {
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background-color: var(--brand-white);
+        top: 0; left: 0; width: 100vw; height: 100vh;
+        background-color: var(--brand-yellow); /* Kuning #F7F200 */
+        z-index: 9999;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        z-index: 9999;
-        transition: opacity 0.5s ease-out;
+        opacity: 1;
+        transition: opacity 0.5s ease-in-out;
     }
-    #splashScreen img {
-        max-width: 250px;
-        width: 60%;
+    
+    /* Class helper untuk menyembunyikan splash dengan transisi */
+    #splashScreen.hide-splash {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .splash-logo {
+        width: 150px;
+        height: 150px;
+        object-fit: contain;
+        animation: bounce 2s infinite;
+    }
+
+    .splash-text {
+        margin-top: 20px;
+        font-weight: 800;
+        font-size: 1.5rem;
+        color: var(--brand-blue);
+        letter-spacing: 1px;
+        opacity: 0;
+        animation: fadeInUp 1s ease-out forwards;
+        animation-delay: 0.3s;
+    }
+
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+        40% {transform: translateY(-20px);}
+        60% {transform: translateY(-10px);}
+    }
+
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
     }
     
     /* --- Universal Styles --- */
@@ -84,29 +114,26 @@
 
     /* --- Landing Page Styles --- */
     .hero-section {
-        background-color: var(--brand-yellow); /* Ubah hero jadi kuning */
-        color: var(--dark-text); /* Ubah teks jadi gelap */
-        padding-bottom: 60px;
+        background-color: var(--brand-yellow);
+        color: var(--dark-text);
+        padding: 60px 0 80px; /* Adjusted padding since banner is removed */
         text-align: center;
-    }
-    /* Revisi: Atur banner agar tidak terlalu lebar dan memiliki sudut melengkung */
-    .hero-banner {
-        width: 100%;
-        max-height: 45vh; /* Batasi tinggi banner */
-        object-fit: cover; /* Pastikan gambar tidak gepeng */
-        border-radius: 24px; /* Tambahkan sudut melengkung */
-        margin-top: 1.5rem; /* Beri sedikit jarak dari navbar */
-        box-shadow: var(--shadow-soft);
     }
     .hero-section h1 {
         font-weight: bold;
-        color: var(--brand-blue); /* Ubah H1 jadi biru */
+        color: var(--brand-blue);
+        font-size: 3rem; /* Increased font size for emphasis since banner is gone */
+        margin-bottom: 1.5rem;
+    }
+    .hero-section p.lead {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
     }
     .features-section {
-        background-color: var(--brand-yellow); /* Ubah fitur jadi kuning */
+        background-color: var(--brand-yellow);
     }
     .feature-card {
-        background-color: var(--brand-white); /* Kartu jadi putih */
+        background-color: var(--brand-white);
         padding: 2rem;
         border-radius: var(--card-radius);
         text-align: center;
@@ -326,23 +353,22 @@
     }
 
     /* --- Pesanan Page Styles --- */
-    /* Revisi: Perbaiki alignment pada kartu ringkasan pesanan */
     .order-summary-card {
         background-color: var(--brand-blue);
         color: var(--brand-white);
         border-radius: var(--card-radius);
         padding: 1.5rem;
         text-align: center;
-        display: flex; /* Tambahkan flexbox */
-        flex-direction: column; /* Atur arah ke bawah */
-        justify-content: center; /* Pusatkan secara vertikal */
+        display: flex; 
+        flex-direction: column; 
+        justify-content: center; 
         height: 100%;
     }
     .order-summary-card .value {
         font-size: 2.5rem;
         font-weight: bold;
         color: var(--brand-yellow);
-        line-height: 1.2; /* Atur line-height agar tidak terlalu jauh */
+        line-height: 1.2; 
     }
     .order-summary-card .title {
         font-size: 1rem;
@@ -366,7 +392,6 @@
         border-radius: var(--card-radius);
         padding: 1rem;
     }
-    /* Revisi: Seragamkan ukuran font untuk semua nilai statistik */
     .stats-card-blue .value {
         font-size: 1.8rem;
         font-weight: bold;
@@ -494,16 +519,15 @@
         .main-header {
             padding: 1rem;
         }
-        .hero-banner {
-             border-radius: 16px;
-        }
     }
   </style>
 </head>
 <body>
-    <!-- Splash Screen -->
+    <!-- Splash Screen (Diperbarui) -->
     <div id="splashScreen">
-        <img src="logo.png" alt="Antre.in Logo">
+        <!-- Logo dengan fallback aman -->
+        <img src="logo.png" alt="Antre.in" class="splash-logo" onerror="this.onerror=null; this.style.display='none';">
+        <div class="splash-text">Antre.in</div>
     </div>
 
     <!-- =================================================================
@@ -537,11 +561,12 @@
           </div>
         </nav>
 
-        <!-- Hero Section -->
+        <!-- Hero Section (Banner dihapus) -->
         <header class="hero-section">
             <div class="container">
-                <!-- Revisi: Mengubah banner agar tidak memanjang dan diberi sudut melengkung -->
-                <img src="banner.png" alt="Banner Usaha" class="hero-banner">
+                <h1 class="display-4">Revolusi Antrean Bisnis Anda</h1>
+                <p class="lead">Kelola pesanan, pantau statistik, dan tingkatkan kepuasan pelanggan dengan Antre.in</p>
+                <a href="#" onclick="showAuthPage(); return false;" class="btn btn-brand btn-lg shadow">Mulai Sekarang Gratis</a>
             </div>
         </header>
 
@@ -608,7 +633,6 @@
         <!-- Testimonials Section -->
         <section id="testimonials" class="testimonials-section section-padding">
             <div class="container">
-                <!-- Revisi: Mengubah teks "Apa Kata Pengguna" -->
                 <h2 class="text-center fw-bold mb-5">Apa Kata UMKM Pengguna Antre.in</h2>
                 <div class="row g-4">
                     <div class="col-md-6">
@@ -1045,18 +1069,18 @@
                             <div class="table-responsive">
                                 <table class="table table-borderless table-hover">
                                     <thead>
-                                        <tr class="table-pesanan">
-                                            <th scope="col">No</th>
-                                            <th scope="col">Nama</th>
-                                            <th scope="col">Pesanan</th>
-                                            <th scope="col">Total</th>
-                                            <th scope="col">Tipe</th>
-                                            <th scope="col">Status</th>
-                                            <th scope="col">Aksi</th>
-                                        </tr>
+                                            <tr class="table-pesanan">
+                                                <th scope="col">No</th>
+                                                <th scope="col">Nama</th>
+                                                <th scope="col">Pesanan</th>
+                                                <th scope="col">Total</th>
+                                                <th scope="col">Tipe</th>
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Aksi</th>
+                                            </tr>
                                     </thead>
                                     <tbody id="queue-table-body">
-                                       <!-- Daftar pesanan akan di-render oleh JavaScript -->
+                                        <!-- Daftar pesanan akan di-render oleh JavaScript -->
                                     </tbody>
                                 </table>
                             </div>
@@ -1366,12 +1390,14 @@
             authPage.classList.add('d-none'); 
 
             splashScreen.classList.remove('d-none');
+            splashScreen.classList.remove('hide-splash');
             splashScreen.style.opacity = '1';
 
             setTimeout(() => {
-                splashScreen.style.opacity = '0';
+                splashScreen.classList.add('hide-splash');
                 setTimeout(() => {
                     splashScreen.classList.add('d-none');
+                    splashScreen.classList.remove('hide-splash');
                     authPage.classList.remove('d-none');
                 }, 500);
             }, 1500);
@@ -1416,26 +1442,44 @@
             }
 
             verificationModal.show();
+            
             setTimeout(() => {
                 verificationModal.hide();
                 authPage.classList.add('d-none');
-                dashboardPage.classList.remove('d-none');
-                updateDashboardUI();
-                checkOverloadStatus();
-                showSection('dashboard', document.querySelector('.sidebar .nav-link.active'));
+                
+                // TRIGGER SPLASH ANIMATION ON LOGIN
+                splashScreen.classList.remove('d-none');
+                splashScreen.classList.remove('hide-splash');
+                splashScreen.style.opacity = '1';
+                
+                setTimeout(() => {
+                    splashScreen.classList.add('hide-splash');
+                    
+                    setTimeout(() => {
+                        splashScreen.classList.add('d-none');
+                        splashScreen.classList.remove('hide-splash');
+                        dashboardPage.classList.remove('d-none');
+                        updateDashboardUI();
+                        checkOverloadStatus();
+                        showSection('dashboard', document.querySelector('.sidebar .nav-link.active'));
+                    }, 500);
+                }, 2000);
             }, 2000);
         }
         
         function logout() {
             dashboardPage.classList.add('d-none');
             
+            // TRIGGER SPLASH ANIMATION ON LOGOUT
             splashScreen.classList.remove('d-none');
+            splashScreen.classList.remove('hide-splash');
             splashScreen.style.opacity = '1';
 
             setTimeout(() => {
-                splashScreen.style.opacity = '0';
+                splashScreen.classList.add('hide-splash');
                 setTimeout(() => {
                     splashScreen.classList.add('d-none');
+                    splashScreen.classList.remove('hide-splash');
                     landingPage.classList.remove('d-none');
                     showLoginForm();
                 }, 500);
@@ -1984,13 +2028,16 @@
         let dashboardSalesChart, monthlySalesLineChart, productPieChart, monthlyIncomeBarChart;
 
         document.addEventListener('DOMContentLoaded', () => {
+            // --- SPLASH SCREEN LOGIC START ---
             setTimeout(() => {
-                splashScreen.style.opacity = '0';
+                splashScreen.classList.add('hide-splash');
                 setTimeout(() => {
                     splashScreen.classList.add('d-none');
+                    splashScreen.classList.remove('hide-splash'); // Reset agar bisa dipakai lagi
                     landingPage.classList.remove('d-none');
                 }, 500);
             }, 2500);
+            // --- SPLASH SCREEN LOGIC END ---
             
             const initialNotifs = document.querySelectorAll('#notification-list > .list-group-item');
             notificationCount = initialNotifs.length;
@@ -2082,5 +2129,3 @@
     </script>
 </body>
 </html>
-
-
